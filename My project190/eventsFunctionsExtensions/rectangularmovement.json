@@ -1,0 +1,2821 @@
+{
+  "author": "@4ian, Tristan Rhodes (https://victrisgames.itch.io/)",
+  "category": "Movement",
+  "extensionNamespace": "",
+  "fullName": "Rectangular Movement (deprecated)",
+  "helpPath": "https://victrisgames.itch.io/extension-rectangular-movement",
+  "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0ibWRpLXNoYXBlLXJlY3RhbmdsZS1wbHVzIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE5LDZIMjJWOEgxOVYxMUgxN1Y4SDE0VjZIMTdWM0gxOVY2TTE3LDE3VjE0SDE5VjE5SDNWNkgxMVY4SDVWMTdIMTdaIiAvPjwvc3ZnPg==",
+  "name": "RectangularMovement",
+  "previewIconUrl": "https://resources.gdevelop-app.com/assets/Icons/shape-rectangle-plus.svg",
+  "shortDescription": "Allow an object to move in a rectangular pattern.",
+  "version": "0.2.1",
+  "description": [
+    "Allow an object to move in a rectangular pattern.",
+    "By default, movement will slow down when going around corners, but this can be changed to always use a constant speed.",
+    "",
+    "Example uses:",
+    "- Moveable platforms",
+    "- Enemy movement patterns",
+    "",
+    "Properties:",
+    "- Center of movement, X position",
+    "- Center of movement, Y position",
+    "- Horizontal distance",
+    "- Vertical distance",
+    "- Horizontal speed",
+    "- Vertical speed",
+    "- Use constant speed (object will not slow down at corners)",
+    "- Use counter-clockwise direction",
+    "",
+    "Tips:",
+    "- Set the CenterX and CenterY values to move the object",
+    "- For horizontal movement only, set vertical distance to 0",
+    "- For vertical movement only, set horizontal distance to 0",
+    "- Use conditions to apply logic based on the direction the object is moving.  For example, setting the animation."
+  ],
+  "origin": {
+    "identifier": "RectangularMovement",
+    "name": "gdevelop-extension-store"
+  },
+  "tags": [
+    "rectangular",
+    "movement",
+    "rectangle",
+    "patrol",
+    "platform",
+    "enemy"
+  ],
+  "authorIds": [
+    "wWP8BSlAW0UP4NeaHa2LcmmDzmH2",
+    "gqDaZjCfevOOxBYkK6zlhtZnXCg1"
+  ],
+  "dependencies": [],
+  "globalVariables": [],
+  "sceneVariables": [],
+  "eventsFunctions": [],
+  "eventsBasedBehaviors": [
+    {
+      "description": "Allow an object to move in a rectangular pattern.",
+      "fullName": "Rectangular Movement (deprecated)",
+      "name": "RectangularMovement",
+      "objectType": "",
+      "eventsFunctions": [
+        {
+          "fullName": "",
+          "functionType": "Action",
+          "name": "doStepPreEvents",
+          "sentence": "",
+          "events": [
+            {
+              "colorB": 228,
+              "colorG": 176,
+              "colorR": 74,
+              "creationTime": 0,
+              "name": "Rectangular movement",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Comment",
+                  "color": {
+                    "b": 109,
+                    "g": 230,
+                    "r": 255,
+                    "textB": 0,
+                    "textG": 0,
+                    "textR": 0
+                  },
+                  "comment": "Set the center of movement to the initial location of the object"
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "RectangularMovement::RectangularMovement::PropertyCenterPointX"
+                      },
+                      "parameters": [
+                        "Object",
+                        "Behavior",
+                        "=",
+                        "0"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "RectangularMovement::RectangularMovement::PropertyCenterPointY"
+                      },
+                      "parameters": [
+                        "Object",
+                        "Behavior",
+                        "=",
+                        "0"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "RectangularMovement::RectangularMovement::SetPropertyCenterPointX"
+                      },
+                      "parameters": [
+                        "Object",
+                        "Behavior",
+                        "=",
+                        "Object.X()"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "RectangularMovement::RectangularMovement::SetPropertyCenterPointY"
+                      },
+                      "parameters": [
+                        "Object",
+                        "Behavior",
+                        "=",
+                        "Object.Y()"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "colorB": 228,
+                  "colorG": 176,
+                  "colorR": 74,
+                  "creationTime": 0,
+                  "name": "Move slowly around corners (default)",
+                  "source": "",
+                  "type": "BuiltinCommonInstructions::Group",
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "inverted": true,
+                            "value": "RectangularMovement::RectangularMovement::PropertyConstantSpeed"
+                          },
+                          "parameters": [
+                            "Object",
+                            "Behavior"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "colorB": 228,
+                          "colorG": 176,
+                          "colorR": 74,
+                          "creationTime": 0,
+                          "name": "Move Clockwise or CounterClockwise",
+                          "source": "",
+                          "type": "BuiltinCommonInstructions::Group",
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Comment",
+                              "color": {
+                                "b": 109,
+                                "g": 230,
+                                "r": 255,
+                                "textB": 0,
+                                "textG": 0,
+                                "textR": 0
+                              },
+                              "comment": "Horizontal movement is the same for both methods"
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyHorizontalDistance"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "!=",
+                                    "0"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreX"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "=",
+                                    "Object.Behavior::PropertyCenterPointX() + cos(ToRad(Object.Behavior::PropertyProgressX())) * abs(Object.Behavior::PropertyHorizontalDistance()) / 2"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Comment",
+                              "color": {
+                                "b": 109,
+                                "g": 230,
+                                "r": 255,
+                                "textB": 0,
+                                "textG": 0,
+                                "textR": 0
+                              },
+                              "comment": "Vertical movement is reversed based on the parameter"
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyVerticalDistance"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "!=",
+                                    "0"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "inverted": true,
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "MettreY"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "=",
+                                        "Object.Behavior::PropertyCenterPointY() + cos(ToRad(Object.Behavior::PropertyProgressY())) * abs(Object.Behavior::PropertyVerticalDistance()) / 2"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "MettreY"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "=",
+                                        "Object.Behavior::PropertyCenterPointY() - cos(ToRad(Object.Behavior::PropertyProgressY())) * abs(Object.Behavior::PropertyVerticalDistance()) / 2"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "parameters": []
+                        },
+                        {
+                          "colorB": 228,
+                          "colorG": 176,
+                          "colorR": 74,
+                          "creationTime": 0,
+                          "name": "Calculate how to move object",
+                          "source": "",
+                          "type": "BuiltinCommonInstructions::Group",
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "<",
+                                    "180"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressX"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyHorizontalSpeed() * TimeDelta()) / 2"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyHorizontalSpeed() * TimeDelta()) / 2"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Skip if no horizontal movement is desired"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyHorizontalDistance"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "0"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "180"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Record direction"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Left\""
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    ">=",
+                                    "180"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "<",
+                                    "360"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressY"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyVerticalSpeed() * TimeDelta()) / 2"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyVerticalSpeed() * TimeDelta()) / 2"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Skip if no vertical movement is desired"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyVerticalDistance"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "0"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "360"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Record direction"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "inverted": true,
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Up\""
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Down\""
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    ">=",
+                                    "360"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "<",
+                                    "540"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressX"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyHorizontalSpeed() * TimeDelta()) / 2"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyHorizontalSpeed() * TimeDelta()) / 2"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Skip if no horizontal movement is desired"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyHorizontalDistance"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "0"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "540"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Record direction"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Right\""
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    ">=",
+                                    "540"
+                                  ]
+                                },
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "<",
+                                    "720"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressY"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyVerticalSpeed() * TimeDelta()) / 2"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyVerticalSpeed() * TimeDelta()) / 2"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Skip if no vertical movement is desired"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyVerticalDistance"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "0"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "720"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Record direction"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "inverted": true,
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Down\""
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Up\""
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Comment",
+                              "color": {
+                                "b": 109,
+                                "g": 230,
+                                "r": 255,
+                                "textB": 0,
+                                "textG": 0,
+                                "textR": 0
+                              },
+                              "comment": "Reset the counter after the rectangular path is completed"
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    ">=",
+                                    "720"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "-",
+                                    "720"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "parameters": []
+                        }
+                      ]
+                    }
+                  ],
+                  "parameters": []
+                },
+                {
+                  "colorB": 228,
+                  "colorG": 176,
+                  "colorR": 74,
+                  "creationTime": 0,
+                  "name": "Move at a constant speed",
+                  "source": "",
+                  "type": "BuiltinCommonInstructions::Group",
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "RectangularMovement::RectangularMovement::PropertyConstantSpeed"
+                          },
+                          "parameters": [
+                            "Object",
+                            "Behavior"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "colorB": 228,
+                          "colorG": 176,
+                          "colorR": 74,
+                          "creationTime": 0,
+                          "name": "Move Clockwise or CounterClockwise",
+                          "source": "",
+                          "type": "BuiltinCommonInstructions::Group",
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Comment",
+                              "color": {
+                                "b": 109,
+                                "g": 230,
+                                "r": 255,
+                                "textB": 0,
+                                "textG": 0,
+                                "textR": 0
+                              },
+                              "comment": "Vertical movement is the same for both methods"
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyVerticalDistance"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "!=",
+                                    "0"
+                                  ]
+                                }
+                              ],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreY"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "=",
+                                    "Object.Behavior::PropertyCenterPointY() - abs(Object.Behavior::PropertyVerticalDistance()) / 2 + Object.Behavior::PropertyProgressY()"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Comment",
+                              "color": {
+                                "b": 109,
+                                "g": 230,
+                                "r": 255,
+                                "textB": 0,
+                                "textG": 0,
+                                "textR": 0
+                              },
+                              "comment": ""
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyHorizontalDistance"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "!=",
+                                    "0"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "inverted": true,
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "MettreX"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "=",
+                                        "Object.Behavior::PropertyCenterPointX() - abs(Object.Behavior::PropertyHorizontalDistance()) / 2 + Object.Behavior::PropertyProgressX()"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "MettreX"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "=",
+                                        "Object.Behavior::PropertyCenterPointX() + abs(Object.Behavior::PropertyHorizontalDistance()) / 2 - Object.Behavior::PropertyProgressX()"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "parameters": []
+                        },
+                        {
+                          "colorB": 228,
+                          "colorG": 176,
+                          "colorR": 74,
+                          "creationTime": 0,
+                          "name": "Calculate how to move object",
+                          "source": "",
+                          "type": "BuiltinCommonInstructions::Group",
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "=",
+                                    "0"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressX"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyHorizontalSpeed() * TimeDelta())"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyProgressX"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        ">=",
+                                        "abs(Object.Behavior::HorizontalDistance())"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressX"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "abs(Object.Behavior::PropertyHorizontalDistance())"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "1"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Record direction"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Left\""
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "inverted": true,
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Right\""
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "=",
+                                    "1"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressY"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "abs(Object.Behavior::PropertyVerticalSpeed() * TimeDelta())"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyProgressY"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        ">=",
+                                        "abs(Object.Behavior::VerticalDistance())"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressY"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "abs(Object.Behavior::PropertyVerticalDistance())"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "1"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Record direction"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Down\""
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "=",
+                                    "2"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressX"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "-",
+                                        "abs(Object.Behavior::PropertyHorizontalSpeed() * TimeDelta())"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Detect when Progress crosses 0 (or if horizontal movement is disabled)"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "BuiltinCommonInstructions::Or"
+                                      },
+                                      "parameters": [],
+                                      "subInstructions": [
+                                        {
+                                          "type": {
+                                            "value": "RectangularMovement::RectangularMovement::PropertyProgressX"
+                                          },
+                                          "parameters": [
+                                            "Object",
+                                            "Behavior",
+                                            "<",
+                                            "0"
+                                          ]
+                                        },
+                                        {
+                                          "type": {
+                                            "value": "RectangularMovement::RectangularMovement::PropertyHorizontalDistance"
+                                          },
+                                          "parameters": [
+                                            "Object",
+                                            "Behavior",
+                                            "=",
+                                            "0"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressX"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "0"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "+",
+                                        "1"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Record direction"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Right\""
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "inverted": true,
+                                        "value": "RectangularMovement::RectangularMovement::PropertyCounterClockwise"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior"
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Left\""
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [
+                                {
+                                  "type": {
+                                    "value": "RectangularMovement::RectangularMovement::PropertyRectangularCounter"
+                                  },
+                                  "parameters": [
+                                    "Object",
+                                    "Behavior",
+                                    "=",
+                                    "3"
+                                  ]
+                                }
+                              ],
+                              "actions": [],
+                              "events": [
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressY"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "-",
+                                        "abs(Object.Behavior::PropertyVerticalSpeed() * TimeDelta())"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Detect when Progress crosses 0 (or if vertical movement is disabled)"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [
+                                    {
+                                      "type": {
+                                        "value": "BuiltinCommonInstructions::Or"
+                                      },
+                                      "parameters": [],
+                                      "subInstructions": [
+                                        {
+                                          "type": {
+                                            "value": "RectangularMovement::RectangularMovement::PropertyProgressY"
+                                          },
+                                          "parameters": [
+                                            "Object",
+                                            "Behavior",
+                                            "<",
+                                            "0"
+                                          ]
+                                        },
+                                        {
+                                          "type": {
+                                            "value": "RectangularMovement::RectangularMovement::PropertyVerticalDistance"
+                                          },
+                                          "parameters": [
+                                            "Object",
+                                            "Behavior",
+                                            "=",
+                                            "0"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyProgressY"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "0"
+                                      ]
+                                    },
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "0"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Comment",
+                                  "color": {
+                                    "b": 109,
+                                    "g": 230,
+                                    "r": 255,
+                                    "textB": 0,
+                                    "textG": 0,
+                                    "textR": 0
+                                  },
+                                  "comment": "Record direction"
+                                },
+                                {
+                                  "type": "BuiltinCommonInstructions::Standard",
+                                  "conditions": [],
+                                  "actions": [
+                                    {
+                                      "type": {
+                                        "value": "RectangularMovement::RectangularMovement::SetPropertyCurrentDirection"
+                                      },
+                                      "parameters": [
+                                        "Object",
+                                        "Behavior",
+                                        "=",
+                                        "\"Up\""
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "parameters": []
+                        }
+                      ]
+                    }
+                  ],
+                  "parameters": []
+                }
+              ],
+              "parameters": []
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Counter used to change the Y position of the object.",
+          "fullName": "Progress Y",
+          "functionType": "Expression",
+          "name": "ProgressY",
+          "sentence": "Set initial Y of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnNumber"
+                  },
+                  "parameters": [
+                    "Object.Behavior::PropertyProgressY()"
+                  ]
+                }
+              ]
+            }
+          ],
+          "expressionType": {
+            "type": "expression"
+          },
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Counter used to change the X position of the object.",
+          "fullName": "Progress X",
+          "functionType": "Expression",
+          "name": "ProgressX",
+          "sentence": "Set initial Y of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnNumber"
+                  },
+                  "parameters": [
+                    "Object.Behavior::PropertyProgressX()"
+                  ]
+                }
+              ]
+            }
+          ],
+          "expressionType": {
+            "type": "expression"
+          },
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Horizontal speed.",
+          "fullName": "Horizontal speed ",
+          "functionType": "Expression",
+          "name": "HorizontalSpeed",
+          "sentence": "Set initial Y of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnNumber"
+                  },
+                  "parameters": [
+                    "Object.Behavior::PropertyHorizontalSpeed()"
+                  ]
+                }
+              ]
+            }
+          ],
+          "expressionType": {
+            "type": "expression"
+          },
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Vertical speed.",
+          "fullName": "Vertical speed",
+          "functionType": "Expression",
+          "name": "VerticalSpeed",
+          "sentence": "Set initial Y of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnNumber"
+                  },
+                  "parameters": [
+                    "Object.Behavior::PropertyVerticalSpeed()"
+                  ]
+                }
+              ]
+            }
+          ],
+          "expressionType": {
+            "type": "expression"
+          },
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Horizontal distance.",
+          "fullName": "Horizontal distance",
+          "functionType": "Expression",
+          "name": "HorizontalDistance",
+          "sentence": "Set initial Y of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnNumber"
+                  },
+                  "parameters": [
+                    "Object.Behavior::PropertyHorizontalDistance()"
+                  ]
+                }
+              ]
+            }
+          ],
+          "expressionType": {
+            "type": "expression"
+          },
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Vertical distance.",
+          "fullName": "Vertical distance",
+          "functionType": "Expression",
+          "name": "VerticalDistance",
+          "sentence": "Set initial Y of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnNumber"
+                  },
+                  "parameters": [
+                    "Object.Behavior::PropertyVerticalDistance()"
+                  ]
+                }
+              ]
+            }
+          ],
+          "expressionType": {
+            "type": "expression"
+          },
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Center of movement, X position.",
+          "fullName": "Center of movement, X position",
+          "functionType": "Expression",
+          "name": "CenterX",
+          "sentence": "Set initial Y of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnNumber"
+                  },
+                  "parameters": [
+                    "Object.Behavior::PropertyCenterPointX()"
+                  ]
+                }
+              ]
+            }
+          ],
+          "expressionType": {
+            "type": "expression"
+          },
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Center of movement, Y position.",
+          "fullName": "Center of movement, Y position",
+          "functionType": "Expression",
+          "name": "CenterY",
+          "sentence": "Set initial Y of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnNumber"
+                  },
+                  "parameters": [
+                    "Object.Behavior::PropertyCenterPointY()"
+                  ]
+                }
+              ]
+            }
+          ],
+          "expressionType": {
+            "type": "expression"
+          },
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Set center Y position.",
+          "fullName": "Set center Y position",
+          "functionType": "Action",
+          "name": "SetCenterY",
+          "sentence": "Set center Y position of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyCenterPointY"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "GetArgumentAsNumber(\"Value\")"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            },
+            {
+              "description": "Value",
+              "name": "Value",
+              "type": "expression"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Set center X position.",
+          "fullName": "Set center X position",
+          "functionType": "Action",
+          "name": "SetCenterX",
+          "sentence": "Set center X position of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyCenterPointX"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "GetArgumentAsNumber(\"Value\")"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            },
+            {
+              "description": "Value",
+              "name": "Value",
+              "type": "expression"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Set horizontal distance.",
+          "fullName": "Set horizontal distance",
+          "functionType": "Action",
+          "name": "SetHorizontalDistance",
+          "sentence": "Set horizontal distance of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyHorizontalDistance"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "GetArgumentAsNumber(\"Value\")"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            },
+            {
+              "description": "Value",
+              "name": "Value",
+              "type": "expression"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Set vertical distance.",
+          "fullName": "Set vertical distance",
+          "functionType": "Action",
+          "name": "SetVerticalDistance",
+          "sentence": "Set vertical distance of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyVerticalDistance"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "GetArgumentAsNumber(\"Value\")"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            },
+            {
+              "description": "Value",
+              "name": "Value",
+              "type": "expression"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Set horizontal speed.",
+          "fullName": "Set horizontal speed",
+          "functionType": "Action",
+          "name": "SetHorizontalSpeed",
+          "sentence": "Set horizontal speed of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyHorizontalSpeed"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "GetArgumentAsNumber(\"Value\")"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            },
+            {
+              "description": "Value",
+              "name": "Value",
+              "type": "expression"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Set vertical speed.",
+          "fullName": "Set vertical speed",
+          "functionType": "Action",
+          "name": "SetVerticalSpeed",
+          "sentence": "Set vertical speed of _PARAM0_ to _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyVerticalSpeed"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "GetArgumentAsNumber(\"Value\")"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            },
+            {
+              "description": "Value",
+              "name": "Value",
+              "type": "expression"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Use counter-clockwise direction.",
+          "fullName": "Use counter-clockwise direction",
+          "functionType": "Action",
+          "name": "SetCounterClockwise",
+          "sentence": "Use counter-clockwise direction for _PARAM0_: _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "GetArgumentAsBoolean"
+                  },
+                  "parameters": [
+                    "\"Value\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyCounterClockwise"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "yes"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": true,
+                    "value": "GetArgumentAsBoolean"
+                  },
+                  "parameters": [
+                    "\"Value\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyCounterClockwise"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            },
+            {
+              "description": "Counter clockwise?",
+              "name": "Value",
+              "type": "yesorno"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Use constant speed.",
+          "fullName": "Use constant speed",
+          "functionType": "Action",
+          "name": "SetConstantSpeed",
+          "sentence": "Use constant speed for _PARAM0_: _PARAM2_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "GetArgumentAsBoolean"
+                  },
+                  "parameters": [
+                    "\"Value\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyConstantSpeed"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "yes"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": true,
+                    "value": "GetArgumentAsBoolean"
+                  },
+                  "parameters": [
+                    "\"Value\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyConstantSpeed"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            },
+            {
+              "description": "Make the speed constant?",
+              "name": "Value",
+              "type": "yesorno"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Reset progress counters. The object will return to the initial state.",
+          "fullName": "Reset progress counters",
+          "functionType": "Action",
+          "name": "ResetProgressCounters",
+          "sentence": "Reset  progress counters on _PARAM0_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyProgressX"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "0"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyProgressY"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "0"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::SetPropertyRectangularCounter"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "0"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Object is moving downwards.",
+          "fullName": "Object is moving downwards",
+          "functionType": "Condition",
+          "name": "IsMovingDown",
+          "sentence": "_PARAM0_ is moving downwards",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::PropertyCurrentDirection"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "\"Down\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "True"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Object is moving upwards.",
+          "fullName": "Object is moving upwards",
+          "functionType": "Condition",
+          "name": "IsMovingUp",
+          "sentence": "_PARAM0_ is moving upwards",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::PropertyCurrentDirection"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "\"Up\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "True"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Object is moving to the left.",
+          "fullName": "Object is moving to the left",
+          "functionType": "Condition",
+          "name": "IsMovingLeft",
+          "sentence": "_PARAM0_ is moving to the left",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::PropertyCurrentDirection"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "\"Left\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "True"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Object is moving to the right.",
+          "fullName": "Object is moving to the right",
+          "functionType": "Condition",
+          "name": "IsMovingRight",
+          "sentence": "_PARAM0_ is moving to the right",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "RectangularMovement::RectangularMovement::PropertyCurrentDirection"
+                  },
+                  "parameters": [
+                    "Object",
+                    "Behavior",
+                    "=",
+                    "\"Right\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "True"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "Object",
+              "name": "Object",
+              "type": "object"
+            },
+            {
+              "description": "Behavior",
+              "name": "Behavior",
+              "supplementaryInformation": "RectangularMovement::RectangularMovement",
+              "type": "behavior"
+            }
+          ],
+          "objectGroups": []
+        }
+      ],
+      "propertyDescriptors": [
+        {
+          "value": "300",
+          "type": "Number",
+          "label": "Horizontal speed",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "name": "HorizontalSpeed"
+        },
+        {
+          "value": "300",
+          "type": "Number",
+          "label": "Vertical speed",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "name": "VerticalSpeed"
+        },
+        {
+          "value": "100",
+          "type": "Number",
+          "label": "Horizontal Distance: Amplitude of the movement on X axis (0 to deactivate)",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "name": "HorizontalDistance"
+        },
+        {
+          "value": "100",
+          "type": "Number",
+          "label": "Vertical Distance: Amplitude of the movement on Y axis (0 to deactivate)",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "name": "VerticalDistance"
+        },
+        {
+          "value": "0",
+          "type": "Number",
+          "label": "Center of movement, X position",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "name": "CenterPointX"
+        },
+        {
+          "value": "0",
+          "type": "Number",
+          "label": "Center of movement, Y position",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "name": "CenterPointY"
+        },
+        {
+          "value": "0",
+          "type": "Number",
+          "label": "Counter used to change X position",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "hidden": true,
+          "name": "ProgressX"
+        },
+        {
+          "value": "0",
+          "type": "Number",
+          "label": "Counter used to change Y position",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "hidden": true,
+          "name": "ProgressY"
+        },
+        {
+          "value": "0",
+          "type": "Number",
+          "label": "Counter used for rectangular movement",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "hidden": true,
+          "name": "RectangularCounter"
+        },
+        {
+          "value": "",
+          "type": "Boolean",
+          "label": "Use a constant speed for movement",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "name": "ConstantSpeed"
+        },
+        {
+          "value": "",
+          "type": "Boolean",
+          "label": "Use counter-clockwise direction",
+          "description": "",
+          "group": "",
+          "extraInformation": [],
+          "name": "CounterClockwise"
+        },
+        {
+          "value": "",
+          "type": "Choice",
+          "label": "Current direction the object is moving",
+          "description": "",
+          "group": "",
+          "extraInformation": [
+            "Left",
+            "Right",
+            "Up",
+            "Down"
+          ],
+          "hidden": true,
+          "name": "CurrentDirection"
+        }
+      ],
+      "sharedPropertyDescriptors": []
+    }
+  ],
+  "eventsBasedObjects": []
+}
