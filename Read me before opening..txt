@@ -1,0 +1,3 @@
+This is the source code of this engine. You can use it for any reasons. It is YOUR responsibility if you do something wrong, Not the game engine.
+
+Please do not steal our engine. Our developers spent our hard work on this.
