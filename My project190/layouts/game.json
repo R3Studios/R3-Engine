@@ -266,7 +266,7 @@
         {
           "name": "Physics2",
           "type": "Physics2::Physics2Behavior",
-          "bodyType": "Dynamic",
+          "bodyType": "Static",
           "bullet": false,
           "fixedRotation": false,
           "canSleep": true,
@@ -287,10 +287,10 @@
           "masks": 1
         },
         {
-          "canBeGrabbed": true,
           "name": "Platform",
-          "platformType": "NormalPlatform",
           "type": "PlatformBehavior::PlatformBehavior",
+          "canBeGrabbed": true,
+          "platformType": "NormalPlatform",
           "yGrabOffset": 0
         },
         {

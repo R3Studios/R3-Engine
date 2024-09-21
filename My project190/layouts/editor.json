@@ -18,7 +18,7 @@
     "gridColor": 10401023,
     "gridAlpha": 0.8,
     "snap": false,
-    "zoomFactor": 0.5800155239904891,
+    "zoomFactor": 0.7315786463753043,
     "windowMask": false
   },
   "objectsGroups": [],
@@ -57,7 +57,7 @@
       "layer": "Layer",
       "name": "NewTiledSprite",
       "persistentUuid": "986d84d9-c433-4dbe-83de-94d6f8246657",
-      "width": 2224,
+      "width": 3705,
       "x": -122,
       "y": 840,
       "zOrder": -1,
