@@ -187,7 +187,7 @@
             "value": "SourisSurObjet"
           },
           "parameters": [
-            "NewSprite",
+            "NewText",
             "",
             "",
             ""
@@ -232,7 +232,7 @@
             "value": "SourisSurObjet"
           },
           "parameters": [
-            "NewSprite",
+            "NewText",
             "",
             "",
             ""
@@ -264,6 +264,43 @@
             "1",
             "",
             "yes"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "BuiltinCommonInstructions::Standard",
+      "conditions": [
+        {
+          "type": {
+            "value": "MouseButtonReleased"
+          },
+          "parameters": [
+            "",
+            "Left"
+          ]
+        },
+        {
+          "type": {
+            "value": "SourisSurObjet"
+          },
+          "parameters": [
+            "NewText",
+            "",
+            "",
+            ""
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": {
+            "value": "Scene"
+          },
+          "parameters": [
+            "",
+            "\"Editor\"",
+            ""
           ]
         }
       ]
